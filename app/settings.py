@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-q6i3r!j!w$g1w4s9kjkr!ry75hs4rn1z#mtp1f=@)hwx)^zp1*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['farmerservice.eba-wismppaz.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -85,15 +86,15 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ebdb',
-        'USER': 'postgres',
-        'PASSWORD': 'd3sPass!',
-        'HOST': 'aa107w2gxg8mx1v.cczusgksd1b9.us-east-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        "NAME": os.environ["RDS_DB_NAME"],
+        "USER": os.environ["RDS_USERNAME"],
+        "PASSWORD": os.environ["RDS_PASSWORD"],
+        "HOST": os.environ["RDS_HOSTNAME"],
+        "PORT": os.environ["RDS_PORT"],
+        "POOL_OPTIONS": {"POOL_SIZE": 100, "MAX_OVERFLOW": 50},
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
