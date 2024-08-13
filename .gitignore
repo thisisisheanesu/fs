@@ -3,3 +3,9 @@ venv
 
 # Elastic Beanstalk folder
 ebextensions
+
+# Pycache files
+__pycache__
+
+# MacOS
+.DS_Store
